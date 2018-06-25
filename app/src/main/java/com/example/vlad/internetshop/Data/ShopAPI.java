@@ -1,10 +1,12 @@
 package com.example.vlad.internetshop.Data;
 
 import com.example.vlad.internetshop.Enteties.DeviceCard;
+import com.example.vlad.internetshop.Enteties.User;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -19,4 +21,7 @@ public interface ShopAPI {
     //@FormUrlEncoded
     @GET("/api/DeviceData")//TODO: Correct here. New API request
     Call<List<DeviceCard>> getAllPromotionalDevices();
+
+    @POST("api/AccountData/Register")
+    Call<Boolean> registerUser(@Body User user);
 }

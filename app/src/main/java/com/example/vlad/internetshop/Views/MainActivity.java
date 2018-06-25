@@ -4,6 +4,7 @@ import com.example.vlad.internetshop.Data.TaskLoadMainDevices;
 import com.example.vlad.internetshop.Enteties.DeviceCard;
 import com.example.vlad.internetshop.Presenters.MainPresenter;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -173,7 +174,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         // Identify what item was selected
         switch (id) {
-
+            case R.id.nav_Register:
+                Intent intent = new Intent(this, RegisterActivity.class);
+                startActivity(intent);
+                break;
         }
         // Close drawer
         mDrawerLayout.closeDrawers();
