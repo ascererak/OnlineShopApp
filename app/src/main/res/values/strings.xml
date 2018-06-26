@@ -9,4 +9,10 @@
     <string name="deviceDescriptionTitle">Description</string>
     <string name="numberOfPurchases">Number of purchases: </string>
     <string name="openBasket">Open basket</string>
+    <string name="register">Registration</string>
+    <string name="name">Name</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirmPassword">Confirm Password</string>
 </resources>
