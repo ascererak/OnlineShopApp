@@ -18,11 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
+
         <activity android:name=".Views.RegisterActivity"></activity>
-=======
         <activity android:name=".Views.DeviceCardActivity"></activity>
->>>>>>> fddfba3561d3d1bb11546e760768d33f3ed7338d
     </application>
 
 </manifest>

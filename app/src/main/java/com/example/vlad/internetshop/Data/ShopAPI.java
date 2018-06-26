@@ -25,10 +25,8 @@ public interface ShopAPI {
     @GET("/api/DeviceData")//TODO: Correct here. New API request
     Call<List<DeviceCard>> getAllPromotionalDevices();
 
-<<<<<<< HEAD
+
     @POST("api/AccountData/Register")
     Call<Boolean> registerUser(@Body User user);
-=======
 
->>>>>>> fddfba3561d3d1bb11546e760768d33f3ed7338d
 }
