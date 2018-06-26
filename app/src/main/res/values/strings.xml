@@ -5,10 +5,17 @@
     <string name="products_in_stock">Products in stock</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+<<<<<<< HEAD
     <string name="register">Registration</string>
     <string name="name">Name</string>
     <string name="username">Username</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="confirmPassword">Confirm Password</string>
+=======
+    <string name="deviceImage">Device image</string>
+    <string name="deviceDescriptionTitle">Description</string>
+    <string name="numberOfPurchases">Number of purchases: </string>
+    <string name="openBasket">Open basket</string>
+>>>>>>> fddfba3561d3d1bb11546e760768d33f3ed7338d
 </resources>

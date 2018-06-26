@@ -1,18 +1,21 @@
 package com.example.vlad.internetshop.Views;
 
 import android.content.Context;
-import android.content.res.Resources;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.vlad.internetshop.Data.ShopData;
 import com.example.vlad.internetshop.Enteties.DeviceCard;
 import com.example.vlad.internetshop.R;
 import com.squareup.picasso.*;
-import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +89,7 @@ public class RecyclerViewMainAdapter extends RecyclerView.Adapter<RecyclerView.V
                 deviceHolder.tvDeviceCardPrice.setText(deviceCardList.get(position).getPrice().toString());
                 deviceHolder.tvDeviceCardName.setText(deviceCardList.get(position).getName());
                 deviceHolder.tvDeviceCardDescription.setText(deviceCardList.get(position).getShortDescription());
+                deviceHolder.deviceCard = deviceCardList.get(position);
                 break;
         }
     }
@@ -100,6 +104,7 @@ public class RecyclerViewMainAdapter extends RecyclerView.Adapter<RecyclerView.V
         TextView tvDeviceCardDescription;
         TextView tvDeviceCardName;
         TextView tvDeviceCardPrice;
+        DeviceCard deviceCard;
 
         public DeviceCardViewHolder(View view) {
             super(view);
@@ -107,6 +112,21 @@ public class RecyclerViewMainAdapter extends RecyclerView.Adapter<RecyclerView.V
             tvDeviceCardDescription = view.findViewById(com.example.vlad.internetshop.R.id.tv_recycMain_ItemDescription);
             tvDeviceCardName = view.findViewById(com.example.vlad.internetshop.R.id.tv_recycMain_ItemName);
             tvDeviceCardPrice = view.findViewById(com.example.vlad.internetshop.R.id.tv_recycMain_ItemPrice);
+
+            //CardViewOnClick -> Show card with current device
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "device id: "+ deviceCard.getDeviceId(), Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(context, DeviceCardActivity.class);
+                    Bundle args = new Bundle();
+                    args.putSerializable(DeviceCardActivity.DEVICE_KEY, deviceCard);
+                    intent.putExtras(args);
+                    context.startActivity(intent);
+
+                }
+            });
         }
     }
 
@@ -136,5 +156,30 @@ public class RecyclerViewMainAdapter extends RecyclerView.Adapter<RecyclerView.V
         deviceCardList = new ArrayList<>();
         deviceCardList.addAll(newList);
         notifyDataSetChanged();
+    }
+
+    public void updateMainList(List<DeviceCard> devices){
+
+        //because we have complex recycler, where first 3 elements aren't the device cards,
+        //so we need to fill this space with empty devices card
+        List<DeviceCard> emptyDevices = new ArrayList<>();
+        emptyDevices.add(new DeviceCard());
+        emptyDevices.add(new DeviceCard());
+        emptyDevices.add(new DeviceCard());
+
+        deviceCardList.clear();
+        deviceCardList.addAll(emptyDevices);
+        deviceCardList.addAll(devices);
+        deviceCardList.add(new DeviceCard());
+
+        //update data to the list
+        notifyDataSetChanged();
+    }
+
+    public void updatePromList(List<DeviceCard> promDevies){
+        this.devicePromList.clear();
+        this.devicePromList.addAll(promDevies);
+        //Update data to the list
+        promAdapter.notifyDataSetChanged();
     }
 }

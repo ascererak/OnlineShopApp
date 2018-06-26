@@ -29,7 +29,7 @@ public class MainPresenter {
     }
 
     public void initRecyclerViews(){
-        view.recyclerViewsDataSetChange(deviceCardList, promotionalDeviceCardList);
+       // view.recyclerViewsDataSetChange(deviceCardList, promotionalDeviceCardList);
     }
 
     public void stopSwipeRefreshing(){

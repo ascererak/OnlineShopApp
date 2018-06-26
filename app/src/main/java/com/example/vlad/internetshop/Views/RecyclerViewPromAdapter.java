@@ -1,6 +1,8 @@
 package com.example.vlad.internetshop.Views;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.vlad.internetshop.Enteties.DeviceCard;
 import com.example.vlad.internetshop.R;
@@ -45,14 +48,7 @@ public class RecyclerViewPromAdapter extends RecyclerView.Adapter<RecyclerViewPr
 
 
         holder.tvSale.setText("-25%");//TODO: Correct here with te actual params
-
-       /* holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String productName = deviceCardList.get(position).getProductName().toString();
-                Toast.makeText(context, productName + " is selected", Toast.LENGTH_SHORT).show();
-            }
-        });*/
+        holder.deviceCard = deviceCardList.get(position);
     }
 
     @Override
@@ -66,6 +62,7 @@ public class RecyclerViewPromAdapter extends RecyclerView.Adapter<RecyclerViewPr
         TextView tvDeviceCardName;
         TextView tvDeviceCardPrice;
         TextView tvSale;
+        DeviceCard deviceCard;
 
         public DeviceCardViewHolder(View view) {
             super(view);
@@ -74,6 +71,20 @@ public class RecyclerViewPromAdapter extends RecyclerView.Adapter<RecyclerViewPr
             tvDeviceCardName = view.findViewById(com.example.vlad.internetshop.R.id.tv_recycProm_ItemName);
             tvDeviceCardPrice = view.findViewById(com.example.vlad.internetshop.R.id.tv_recycProm_ItemPrice);
             tvSale = view.findViewById(R.id.tv_sale);
+
+            //CardViewOnClick -> Show card with current device
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "device id: "+ deviceCard.getDeviceId(), Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(context, DeviceCardActivity.class);
+                    Bundle args = new Bundle();
+                    args.putSerializable(DeviceCardActivity.DEVICE_KEY, deviceCard);
+                    intent.putExtras(args);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

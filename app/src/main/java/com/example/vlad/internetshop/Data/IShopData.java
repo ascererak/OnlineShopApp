@@ -7,4 +7,5 @@ import java.util.List;
 public interface IShopData {
     List<DeviceCard> getAllDevices();
     List<DeviceCard> getAllPromotionalDevices();
+    DeviceCard getDevice(long id);
 }
