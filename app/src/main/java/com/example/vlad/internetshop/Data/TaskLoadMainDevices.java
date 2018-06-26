@@ -18,10 +18,10 @@ public class TaskLoadMainDevices extends AsyncTaskLoader<List<DeviceCard>> {
     private ShopData data;
     private boolean getPromotional;
 
-    public TaskLoadMainDevices(Context context, MainPresenter presenter, ShopData data, boolean getPromotional){
+    public TaskLoadMainDevices(Context context, MainPresenter presenter, boolean getPromotional){
         super(context);
         this.presenter = presenter;
-        this.data = data;
+        this.data = new ShopData();
         this.getPromotional = getPromotional;
     }
 

@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -16,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ShopData implements IShopData{
 
-    private final String BASE_URL = "http://webshopnetcore220180619022619.azurewebsites.net";
+    private final String BASE_URL = "http://multiflexersshop.azurewebsites.net";
     private Gson gson = new GsonBuilder().create();
     private Retrofit retrofit = new Retrofit.Builder().
             addConverterFactory(GsonConverterFactory.create(gson)).
@@ -43,6 +44,26 @@ public class ShopData implements IShopData{
         }
 
         return list;
+    }
+
+    /**
+     * Get information for concrete device with current id
+     * @param id - id of the device
+     * @return deviceCard - info about device.
+     */
+    @Override
+    public DeviceCard getDevice(long id) {
+        DeviceCard deviceCard = null;
+
+        Call<DeviceCard> call = shopAPI.gttDevice(id);
+        try {
+            Response<DeviceCard> response = call.execute();
+            deviceCard = response.body();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        return deviceCard;
     }
 
     /**

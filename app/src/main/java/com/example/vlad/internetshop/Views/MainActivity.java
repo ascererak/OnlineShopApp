@@ -182,34 +182,16 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     /** End new code*/
 
+    /**
+     *  Initialize recyclerview in the beginning
+     */
     public void initRecyclerViews() {
         //Recyclerview Main
-        mainDevicesList.add(new DeviceCard());
-        promotionalDeviceCardList.add(new DeviceCard());
         recyclerViewDevicesCards = (RecyclerView) findViewById(R.id.recyclerViewMain);
         deviceCardAdapter = new RecyclerViewMainAdapter(mainDevicesList, promotionalDeviceCardList, getApplicationContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false);
         recyclerViewDevicesCards.setLayoutManager(layoutManager);
         recyclerViewDevicesCards.setAdapter(deviceCardAdapter);
-
-        //Recyclerview with promotional devices
-        //recyclerViewPromotional = (RecyclerView)findViewById(R.id.recyclerViewPromotional);
-        //promotionalDeviceCardAdapter = new RecyclerViewPromAdapter(promotionalDeviceCardList, getApplicationContext());
-        //LinearLayoutManager horizontalManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
-        //recyclerViewPromotional.setLayoutManager(horizontalManager);
-        //recyclerViewPromotional.setAdapter(promotionalDeviceCardAdapter);
-    }
-
-    public void recyclerViewsDataSetChange(List<DeviceCard> deviceCardList, List<DeviceCard> promotionalDeviceCardList) {
-        mainDevicesList.clear();
-        mainDevicesList.addAll(deviceCardList);
-        //update data to the list
-        deviceCardAdapter.notifyDataSetChanged();
-
-        this.promotionalDeviceCardList.clear();
-        this.promotionalDeviceCardList.addAll(promotionalDeviceCardList);
-        //Update data to the list
-        deviceCardAdapter.getPromAdapter().notifyDataSetChanged();
     }
 
     @Override
@@ -224,29 +206,34 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         loadAllDeives(true, true);
     }
 
+    /**
+     * Loader Callback, create loader by current id with params in bundle
+     * @param id - id of the loader
+     * @param args - params for init loader
+     * @return list of deviceCard
+     */
     @NonNull
     @Override
     public Loader<List<DeviceCard>> onCreateLoader(int id, @Nullable Bundle args) {
         if (id == LOADER_ALL_DEVICES_ID)
-            return new TaskLoadMainDevices(MainActivity.this, presenter, presenter.getShopData(), false);
+            return new TaskLoadMainDevices(MainActivity.this, presenter,  false);
         else
-            return new TaskLoadMainDevices(MainActivity.this, presenter, presenter.getShopData(), true);
+            return new TaskLoadMainDevices(MainActivity.this, presenter,  true);
     }
 
+    /**
+     * Loader callback. Loader finishes its work here and return the result. updating all views with the new lists
+     * @param loader loader object that finishes work
+     * @param data data that returns loader
+     */
     @Override
     public void onLoadFinished(@NonNull Loader<List<DeviceCard>> loader, List<DeviceCard> data) {
         switch (loader.getId()) {
             case LOADER_ALL_DEVICES_ID:
-                mainDevicesList.clear();
-                mainDevicesList.addAll(data);
-                //update data to the list
-                deviceCardAdapter.notifyDataSetChanged();
+                deviceCardAdapter.updateMainList(data);
                 break;
             case LOADER_ALL_PROMOTIONAL_DEVICES_ID:
-                this.promotionalDeviceCardList.clear();
-                this.promotionalDeviceCardList.addAll(data);
-                //Update data to the list
-                deviceCardAdapter.getPromAdapter().notifyDataSetChanged();
+                deviceCardAdapter.updatePromList(data);
                 break;
         }
 
@@ -263,6 +250,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     }
 
+    /**
+     * starts(returns existing) loader if restart is false, restarts the loader if the restart flag is true.
+     * flag isPromotiomal used for make a decision what id use.
+     * @param restart flag if this loader must reload data
+     * @param isPromotional flag if this loader must load promotional devices
+     */
     private void loadAllDeives(boolean restart, boolean isPromotional) {
         swipeRefreshLayoutMain.setRefreshing(true);
         loaderToLoad.incrementAndGet();
