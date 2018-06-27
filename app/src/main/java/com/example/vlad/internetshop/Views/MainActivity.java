@@ -1,5 +1,6 @@
 package com.example.vlad.internetshop.Views;
 
+import com.example.vlad.internetshop.Data.ShopData;
 import com.example.vlad.internetshop.Data.TaskLoadMainDevices;
 import com.example.vlad.internetshop.Enteties.DeviceCard;
 import com.example.vlad.internetshop.Presenters.MainPresenter;
@@ -29,8 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.example.vlad.internetshop.Data.IShopData;
-import com.example.vlad.internetshop.Data.ShopData;
 import com.example.vlad.internetshop.R;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, IMainActivity,
@@ -245,7 +244,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         if (loaderToLoad.decrementAndGet() == 0) {
             Log.d("Tagg", "stop refreshing");
             swipeRefreshLayoutMain.setRefreshing(false);
-            //recyclerViewsDataSetChange(mainDevicesList, promotionalDeviceCardList);
         }
     }
 

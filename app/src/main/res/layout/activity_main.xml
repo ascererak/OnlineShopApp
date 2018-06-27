@@ -15,8 +15,8 @@
             layout="@layout/navigation_action"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
         </include>
+
         <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshMain"
         android:layout_height="match_parent"
@@ -30,8 +30,6 @@
             android:background="@color/grey"
             tools:context=".Views.MainActivity">
 
-            <!--Here was prom recyclerview -->
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerViewMain"
                 android:layout_width="match_parent"
@@ -39,7 +37,6 @@
                 android:orientation="horizontal"
                 android:layout_marginRight="5dp"
                 android:layout_marginLeft="5dp"
-                android:layout_weight="1"
                 android:layout_marginBottom="5dp"/>
 
         </LinearLayout>

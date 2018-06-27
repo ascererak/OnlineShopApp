@@ -7,15 +7,19 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ShopData implements IShopData{
+public class ShopData implements IShopData, Serializable{
 
     private final String BASE_URL = "http://multiflexersshop.azurewebsites.net";
     private Gson gson = new GsonBuilder().create();
@@ -25,6 +29,8 @@ public class ShopData implements IShopData{
             build();
 
     private ShopAPI shopAPI = retrofit.create(ShopAPI.class);
+
+    public static List<DeviceCard> basketDeviceList = new ArrayList<>();
 
     /**
      * Get all devicesCards
@@ -80,8 +86,6 @@ public class ShopData implements IShopData{
         }
         catch (IOException e){
             e.printStackTrace();
-            list.clear();
-            list.add(new DeviceCard());
         }
 
         return list;

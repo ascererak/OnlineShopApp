@@ -4,14 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.vlad.internetshop.Data.ShopData;
 import com.example.vlad.internetshop.Enteties.DeviceCard;
 import com.example.vlad.internetshop.R;
 import com.squareup.picasso.Picasso;
@@ -47,8 +50,17 @@ public class RecyclerViewPromAdapter extends RecyclerView.Adapter<RecyclerViewPr
         holder.tvDeviceCardDescription.setText(deviceCardList.get(position).getShortDescription());
 
 
-        holder.tvSale.setText("-25%");//TODO: Correct here with te actual params
+        holder.tvSale.setText("-"+deviceCardList.get(position).getPromotional().toString()+"%");
         holder.deviceCard = deviceCardList.get(position);
+
+        holder.btnBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShopData.basketDeviceList.add(deviceCardList.get(position));
+                //Load basket activity
+                Intent intent = new Intent(context, BasketActivity.class);
+                context.startActivity(intent);
+            }});
     }
 
     @Override
@@ -63,6 +75,7 @@ public class RecyclerViewPromAdapter extends RecyclerView.Adapter<RecyclerViewPr
         TextView tvDeviceCardPrice;
         TextView tvSale;
         DeviceCard deviceCard;
+        Button btnBuy;
 
         public DeviceCardViewHolder(View view) {
             super(view);
@@ -71,13 +84,12 @@ public class RecyclerViewPromAdapter extends RecyclerView.Adapter<RecyclerViewPr
             tvDeviceCardName = view.findViewById(com.example.vlad.internetshop.R.id.tv_recycProm_ItemName);
             tvDeviceCardPrice = view.findViewById(com.example.vlad.internetshop.R.id.tv_recycProm_ItemPrice);
             tvSale = view.findViewById(R.id.tv_sale);
+            btnBuy = view.findViewById(R.id.btn_recycPromBuy);
 
             //CardViewOnClick -> Show card with current device
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "device id: "+ deviceCard.getDeviceId(), Toast.LENGTH_SHORT).show();
-
                     Intent intent = new Intent(context, DeviceCardActivity.class);
                     Bundle args = new Bundle();
                     args.putSerializable(DeviceCardActivity.DEVICE_KEY, deviceCard);
@@ -85,6 +97,7 @@ public class RecyclerViewPromAdapter extends RecyclerView.Adapter<RecyclerViewPr
                     context.startActivity(intent);
                 }
             });
+
         }
     }
 }

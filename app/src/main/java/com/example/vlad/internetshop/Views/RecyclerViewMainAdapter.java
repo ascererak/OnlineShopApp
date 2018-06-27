@@ -2,12 +2,15 @@ package com.example.vlad.internetshop.Views;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -90,6 +93,15 @@ public class RecyclerViewMainAdapter extends RecyclerView.Adapter<RecyclerView.V
                 deviceHolder.tvDeviceCardName.setText(deviceCardList.get(position).getName());
                 deviceHolder.tvDeviceCardDescription.setText(deviceCardList.get(position).getShortDescription());
                 deviceHolder.deviceCard = deviceCardList.get(position);
+                deviceHolder.btnBuy.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ShopData.basketDeviceList.add(deviceCardList.get(position));
+                        //Load basket activity
+                        Intent intent = new Intent(context, BasketActivity.class);
+                        context.startActivity(intent);
+                    }
+                });
                 break;
         }
     }
@@ -105,6 +117,7 @@ public class RecyclerViewMainAdapter extends RecyclerView.Adapter<RecyclerView.V
         TextView tvDeviceCardName;
         TextView tvDeviceCardPrice;
         DeviceCard deviceCard;
+        Button btnBuy;
 
         public DeviceCardViewHolder(View view) {
             super(view);
@@ -112,13 +125,12 @@ public class RecyclerViewMainAdapter extends RecyclerView.Adapter<RecyclerView.V
             tvDeviceCardDescription = view.findViewById(com.example.vlad.internetshop.R.id.tv_recycMain_ItemDescription);
             tvDeviceCardName = view.findViewById(com.example.vlad.internetshop.R.id.tv_recycMain_ItemName);
             tvDeviceCardPrice = view.findViewById(com.example.vlad.internetshop.R.id.tv_recycMain_ItemPrice);
+            btnBuy = view.findViewById(R.id.btn_recycMainBuy);
 
             //CardViewOnClick -> Show card with current device
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "device id: "+ deviceCard.getDeviceId(), Toast.LENGTH_SHORT).show();
-
                     Intent intent = new Intent(context, DeviceCardActivity.class);
                     Bundle args = new Bundle();
                     args.putSerializable(DeviceCardActivity.DEVICE_KEY, deviceCard);
@@ -161,7 +173,7 @@ public class RecyclerViewMainAdapter extends RecyclerView.Adapter<RecyclerView.V
     public void updateMainList(List<DeviceCard> devices){
 
         //because we have complex recycler, where first 3 elements aren't the device cards,
-        //so we need to fill this space with empty devices card
+        //we need to fill this space in the list with empty devices cards
         List<DeviceCard> emptyDevices = new ArrayList<>();
         emptyDevices.add(new DeviceCard());
         emptyDevices.add(new DeviceCard());
@@ -170,7 +182,6 @@ public class RecyclerViewMainAdapter extends RecyclerView.Adapter<RecyclerView.V
         deviceCardList.clear();
         deviceCardList.addAll(emptyDevices);
         deviceCardList.addAll(devices);
-        deviceCardList.add(new DeviceCard());
 
         //update data to the list
         notifyDataSetChanged();

@@ -1,5 +1,6 @@
 package com.example.vlad.internetshop.Views;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.example.vlad.internetshop.Data.ShopData;
 import com.example.vlad.internetshop.Enteties.DeviceCard;
 import com.squareup.picasso.Picasso;
 import com.example.vlad.internetshop.R;
@@ -24,6 +26,7 @@ public class DeviceCardActivity extends AppCompatActivity{
 
     Button btnDeviceCardBuy;
     ImageView imgDeviceCardInfo;
+    DeviceCard device;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,9 @@ public class DeviceCardActivity extends AppCompatActivity{
         btnDeviceCardBuy = (Button)findViewById(R.id.btnDeviceCardBuy);
         imgDeviceCardInfo = (ImageView)findViewById(R.id.imgDeviceCardInfo);
 
+        Bundle args = getIntent().getExtras();
+        device = (DeviceCard)args.getSerializable(DEVICE_KEY);
+
         //fill viw with the device data
         initDeviceInfo();
 
@@ -54,8 +60,10 @@ public class DeviceCardActivity extends AppCompatActivity{
         btnDeviceCardBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnDeviceCardBuy.setText(getResources().getString(R.string.openBasket));
-                //TODO: add to the basket
+                ShopData.basketDeviceList.add(device);
+                Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -66,9 +74,6 @@ public class DeviceCardActivity extends AppCompatActivity{
      * get extras (DeviceCard) and show info about device
      */
     private void initDeviceInfo() {
-        Bundle args = getIntent().getExtras();
-        DeviceCard device = (DeviceCard)args.getSerializable(DEVICE_KEY);
-
         Picasso.get().
                 load(device.getImageUrl()).
                 into(imgDeviceCardInfo);

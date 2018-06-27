@@ -56,16 +56,16 @@
                     android:textSize="14sp"
                     android:layout_weight="1"/>
 
-                <ImageButton
-                    android:id="@+id/btn_recycProm"
+                <Button
+                    android:id="@+id/btn_recycPromBuy"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_shopping_basket"
-                    android:background="@color/grey"
-                    android:padding="8dp"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
                     android:layout_weight="1"
+                    android:background="@color/grey"
+                    android:drawableTop="@drawable/ic_shopping_basket"
+                    android:paddingTop="2dp"
                     />
 
             </LinearLayout>
