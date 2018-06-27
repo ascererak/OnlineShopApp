@@ -68,8 +68,9 @@
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
                     android:layout_weight="1"
-                    android:background="@color/grey"
-                    android:drawableTop="@drawable/ic_shopping_basket"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/Buy"
+                    android:textColor="@color/white"
                     android:paddingTop="4dp"
                     />
 

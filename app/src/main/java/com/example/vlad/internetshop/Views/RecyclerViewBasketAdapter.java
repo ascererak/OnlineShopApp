@@ -23,11 +23,13 @@ public class RecyclerViewBasketAdapter extends RecyclerView.Adapter<RecyclerView
     List<DeviceCard> deviceCardList;
     Context context;
     TextView basketPrice;
+    Double amount;
 
-    public RecyclerViewBasketAdapter(Context context, List<DeviceCard> deviceCardList, TextView basketPrice){
+    public RecyclerViewBasketAdapter(Context context, List<DeviceCard> deviceCardList, TextView basketPrice, Double amount){
         this.context = context;
         this.deviceCardList = deviceCardList;
         this.basketPrice = basketPrice;
+        this.amount = amount;
     }
 
     @NonNull
@@ -49,10 +51,9 @@ public class RecyclerViewBasketAdapter extends RecyclerView.Adapter<RecyclerView
             @Override
             public void onClick(View v) {
 
-                double newPrice = Double.parseDouble(basketPrice.getText().toString().substring(0, basketPrice.getText().toString().length()-2))
-                        - deviceCardList.get(position).getPrice();
-                newPrice = newPrice < 0 ? 0 : newPrice;
-                basketPrice.setText(String.valueOf(newPrice));
+                amount -= deviceCardList.get(position).getPrice();
+                amount = amount< 0 ? 0 : amount;
+                basketPrice.setText(String.valueOf(amount) + " $");
 
                 deviceCardList.remove(position);
                 notifyItemRemoved(position);

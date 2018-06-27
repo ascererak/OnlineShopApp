@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <!--<item android:id="@+id/nav_settings"-->
-        <!--android:icon="@mipmap/ic_settings_black_24dp"-->
-        <!--android:title="Settings"/>-->
 
-    <!--<item android:id="@+id/nav_logout"-->
-        <!--android:icon="@mipmap/ic_exit_to_app_black_24dp"-->
-        <!--android:title="Log out"/>-->
+    <item android:id="@+id/nav_basket"
+        android:icon="@drawable/baseline_shopping_cart_black_24dp"
+        android:title="Basket"/>
+    <item android:id="@+id/nav_sign_in"
+        android:icon="@drawable/baseline_person_black_24dp"
+        android:title="Sign in"/>
     <item android:id="@+id/nav_Register"
+        android:icon="@drawable/baseline_person_add_black_24dp"
         android:title="Register"/>
+    <item android:id="@+id/nav_logout"
+    android:icon="@drawable/exit"
+    android:title="Log out"/>
 </menu>

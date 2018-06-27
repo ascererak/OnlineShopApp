@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/navigation_action"
+   <include
+        layout="@layout/simple_text_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

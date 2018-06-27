@@ -34,11 +34,19 @@ public class DeviceCardActivity extends AppCompatActivity{
         setContentView(R.layout.activity_device_card);
 
         //Add back arrow into the toolbar
-        Toolbar toolbar = findViewById(R.id.navAction);
+        Toolbar toolbar = findViewById(R.id.simpleTextToolbar);
+        TextView tvToolbarText = findViewById(R.id.toolbarText);
+        tvToolbarText.setText(getResources().getString(R.string.app_name));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.getNavigationIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         //find views
 

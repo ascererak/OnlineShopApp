@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.vlad.internetshop">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -20,7 +21,8 @@
         </activity>
         <activity android:name=".Views.DeviceCardActivity" />
         <activity android:name=".Views.RegisterActivity" />
-        <activity android:name=".Views.BasketActivity"></activity>
+        <activity android:name=".Views.BasketActivity" />
+        <activity android:name=".Views.OrderActivity"></activity>
     </application>
 
 </manifest>

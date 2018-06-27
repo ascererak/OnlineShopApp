@@ -5,8 +5,11 @@ import com.example.vlad.internetshop.Data.TaskLoadMainDevices;
 import com.example.vlad.internetshop.Enteties.DeviceCard;
 import com.example.vlad.internetshop.Presenters.MainPresenter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -25,6 +28,7 @@ import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,9 +73,24 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 getResources().getColor(android.R.color.holo_blue_dark));
         initRecyclerViews();
 
-        //load all devices and promotional devices
-        loadAllDeives(false, true);
-        loadAllDeives(false, false);
+        if(checkInternetConnectionOk()){
+            //load all devices and promotional devices
+            loadAllDeives(false, true);
+            loadAllDeives(false, false);
+        }
+        else{
+            Toast.makeText(MainActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * Check if internet connection is ok
+     * @return is internet works
+     */
+    private boolean checkInternetConnectionOk() {
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
     }
 
     /** Start new code*/
@@ -175,6 +194,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         switch (id) {
             case R.id.nav_Register:
                 Intent intent = new Intent(this, RegisterActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_basket:
+                intent = new Intent(getApplicationContext(), BasketActivity.class);
                 startActivity(intent);
                 break;
         }

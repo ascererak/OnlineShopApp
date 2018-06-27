@@ -11,6 +11,7 @@
     <string name="openBasket">Open basket</string>
     <string name="register">Registration</string>
     <string name="name">Name</string>
+    <string name="lastName">Last name</string>
     <string name="username">Username</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -18,4 +19,13 @@
     <string name="Basket">Basket</string>
     <string name="ConfirmPurchase">Confirm purchase</string>
     <string name="Remove">Remove</string>
+    <string name="Ordering">Ordering</string>
+    <string name="signUp">Sign up</string>
+    <string name="order">Order</string>
+    <string name="cardNumber">Card number</string>
+    <string name="cardMonth">MM</string>
+    <string name="cardYear">YY</string>
+    <string name="cardMMYYSeparator">/</string>
+    <string name="cardCV">CV</string>
+    <string name="orderPrice">Order price:</string>
 </resources>

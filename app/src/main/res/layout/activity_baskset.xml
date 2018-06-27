@@ -7,7 +7,7 @@
     tools:context=".Views.BasketActivity">
 
     <include
-        layout="@layout/basket_toolbar"
+        layout="@layout/simple_text_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </include>
@@ -45,7 +45,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/colorPrimary"
-                android:text="@string/ConfirmPurchase"
+                android:text="@string/order"
                 android:textSize="18sp"
                 android:textColor="@color/white"/>
 
