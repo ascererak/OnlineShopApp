@@ -88,7 +88,15 @@ public class ShopData implements IShopData, Serializable{
             e.printStackTrace();
         }
 
-        return list;
+        ArrayList<DeviceCard> justPromotional = new ArrayList<>();
+
+        for(DeviceCard deviceCard : list){
+            if(deviceCard.getPromotional()>0){
+                justPromotional.add(deviceCard);
+            }
+        }
+
+        return justPromotional;
     }
 
 }
