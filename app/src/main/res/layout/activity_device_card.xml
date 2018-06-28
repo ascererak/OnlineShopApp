@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/linearLayoutMainDeviceCard"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
@@ -12,112 +13,120 @@
         android:layout_height="wrap_content">
 
     </include>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        tools:context=".Views.DeviceCardActivity">
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardViewDeviceHeader"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp">
+            android:layout_height="match_parent"
+            tools:context=".Views.DeviceCardActivity">
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <ImageView
-                    android:id="@+id/imgDeviceCardInfo"
+                android:layout_weight="1">
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:contentDescription="@string/deviceImage"
-                    android:layout_weight="1"/>
+                    android:layout_height="match_parent">
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cardViewDeviceHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:id="@+id/imgDeviceCardInfo"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:contentDescription="@string/deviceImage"
+                                android:layout_weight="1"/>
+
+                            <TextView
+                                android:id="@+id/tvDeviceCardName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:layout_marginTop="5dp"
+                                android:layout_below="@id/imgDeviceCardInfo"
+                                />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:textSize="14sp"
+                                    android:text="@string/numberOfPurchases"/>
+
+                                <TextView
+                                    android:id="@+id/tvDeviceCardNumberOfPurchases"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="5dp"
+                                    android:textSize="14sp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/tvDeviceCardDescriptionTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:text="@string/deviceDescriptionTitle"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_below="@id/cardViewDeviceHeader"/>
+
+                    <TextView
+                        android:id="@+id/tvDeviceCardDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textSize="14sp"
+                        android:text="@string/deviceDescriptionTitle"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_below="@id/tvDeviceCardDescriptionTitle"/>
+
+                </RelativeLayout>
+            </ScrollView>
+            <LinearLayout
+                android:layout_height="40dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true">
 
                 <TextView
-                    android:id="@+id/tvDeviceCardName"
+                    android:id="@+id/tvDeviceCardPrice"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:textSize="18sp"
-                    android:layout_marginTop="5dp"
-                    android:layout_below="@id/imgDeviceCardInfo"
-                    />
+                    android:background="@color/grey"
+                    android:textColor="@color/black"/>
 
-                <LinearLayout
+                <Button
+                    android:id="@+id/btnDeviceCardBuy"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="5dp">
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/Buy"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:textSize="14sp"
-                        android:text="@string/numberOfPurchases"/>
-
-                    <TextView
-                        android:id="@+id/tvDeviceCardNumberOfPurchases"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:textSize="14sp"/>
-                </LinearLayout>
             </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <TextView
-            android:id="@+id/tvDeviceCardDescriptionTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:text="@string/deviceDescriptionTitle"
-            android:layout_marginHorizontal="10dp"
-            android:layout_below="@id/cardViewDeviceHeader"/>
-
-        <TextView
-            android:id="@+id/tvDeviceCardDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textSize="14sp"
-            android:text="@string/deviceDescriptionTitle"
-            android:layout_marginHorizontal="10dp"
-            android:layout_below="@id/tvDeviceCardDescriptionTitle"/>
-
-        <LinearLayout
-            android:layout_height="40dp"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_alignParentBottom="true">
-
-            <TextView
-                android:id="@+id/tvDeviceCardPrice"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="18sp"
-                android:background="@color/grey"
-                android:textColor="@color/black"/>
-
-            <Button
-                android:id="@+id/btnDeviceCardBuy"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:text="@string/Buy"
-                android:textSize="18sp"
-                android:textColor="@color/white"/>
-
-        </LinearLayout>
-    </RelativeLayout>
+        </RelativeLayout>
 </LinearLayout>
 

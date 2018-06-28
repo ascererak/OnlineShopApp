@@ -59,7 +59,7 @@ public class RecyclerViewPromAdapter extends RecyclerView.Adapter<RecyclerViewPr
                 ShopData.basketDeviceList.add(deviceCardList.get(position));
                 //Load basket activity
                 Intent intent = new Intent(context, BasketActivity.class);
-                context.startActivity(intent);
+                v.getContext().startActivity(intent);
             }});
     }
 
@@ -94,7 +94,7 @@ public class RecyclerViewPromAdapter extends RecyclerView.Adapter<RecyclerViewPr
                     Bundle args = new Bundle();
                     args.putSerializable(DeviceCardActivity.DEVICE_KEY, deviceCard);
                     intent.putExtras(args);
-                    context.startActivity(intent);
+                    v.getContext().startActivity(intent);
                 }
             });
 
