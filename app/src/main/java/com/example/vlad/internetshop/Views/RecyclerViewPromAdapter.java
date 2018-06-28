@@ -19,6 +19,7 @@ import com.example.vlad.internetshop.Enteties.DeviceCard;
 import com.example.vlad.internetshop.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerViewPromAdapter extends RecyclerView.Adapter<RecyclerViewPromAdapter.DeviceCardViewHolder>{
@@ -26,7 +27,7 @@ public class RecyclerViewPromAdapter extends RecyclerView.Adapter<RecyclerViewPr
     private Context context;
 
     public RecyclerViewPromAdapter(List<DeviceCard> deviceCardList, Context context){
-        this.deviceCardList= deviceCardList;
+        this.deviceCardList = deviceCardList;
         this.context = context;
     }
 
